@@ -892,10 +892,9 @@ def run_command(runtime, timeout=0.2):
     http://stackoverflow.com/questions/4984549/merge-and-sync-stdout-and-stderr/5188359#5188359
     """
     PIPE = subprocess.PIPE
-    proc = subprocess.Popen(runtime.cmdline,
+    proc = subprocess.Popen(runtime.cmdline.split(),
                              stdout=PIPE,
                              stderr=PIPE,
-                             shell=True,
                              cwd=runtime.cwd,
                              env=runtime.environ)
     streams = [
