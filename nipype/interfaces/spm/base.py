@@ -224,6 +224,10 @@ class SPMCommand(BaseInterface):
             self.__class__.__name__.split('.')[-1].lower()
 
     @property
+    def version(self):
+        return Info.version()
+
+    @property
     def jobtype(self):
         return self._jobtype
 
