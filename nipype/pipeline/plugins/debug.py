@@ -33,5 +33,5 @@ class DebugPlugin(PluginBase):
             raise ValueError('Input must be a networkx digraph object')
         logger.info("Executing debug plugin")
         for node in nx.topological_sort(graph):
-            self._callable(node, graph)
+            self._callable(node, graph, updatehash=updatehash)
 
