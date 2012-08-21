@@ -40,6 +40,10 @@ extensions = ['sphinx.ext.autodoc',
               'only_directives',
               ]
 
+sys.path.append(os.path.abspath('_themes'))
+html_theme_path = ['_themes']
+html_theme = 'bootstrap'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
