@@ -324,7 +324,8 @@ def analyze_openfmri_dataset(data_dir, subject=None, model_id=None, work_dir=Non
     wf.config['execution'] = dict(crashdump_dir=os.path.join(work_dir,
                                                              'crashdumps'),
                                   stop_on_first_crash=True)
-    wf.run('MultiProc', plugin_args={'n_procs': 2})
+    eg = wf.run('MultiProc', plugin_args={'n_procs': 2})
+    return eg
 
 if __name__ == '__main__':
     import argparse
@@ -334,6 +335,11 @@ if __name__ == '__main__':
     parser.add_argument('--subject', default=None)
     parser.add_argument('--model', default=1)
     args = parser.parse_args()
-    analyze_openfmri_dataset(data_dir=os.path.abspath(args.datasetdir),
+    eg = analyze_openfmri_dataset(data_dir=os.path.abspath(args.datasetdir),
                              subject=args.subject,
                              model_id=int(args.model))
+    from nipype.pipeline.utils import write_prov
+    from nipype.external.provgraph import provjson_to_filename
+    g = write_prov(eg, 'workflow.json')
+    provjson_to_filename(g, 'workflow.pdf', use_labels=True, format='pdf')
+
