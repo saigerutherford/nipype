@@ -323,7 +323,7 @@ def analyze_openfmri_dataset(data_dir, subject=None, model_id=None, work_dir=Non
     datasink.inputs.base_directory = os.path.join(work_dir, 'output')
     wf.config['execution'] = dict(crashdump_dir=os.path.join(work_dir,
                                                              'crashdumps'),
-                                  stop_on_first_crash=True)
+                                  stop_on_first_crash=False)
     eg = wf.run('MultiProc', plugin_args={'n_procs': 2})
     return eg
 
