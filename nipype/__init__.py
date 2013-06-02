@@ -33,11 +33,14 @@ class _NoseTester(nosetester.NoseTester):
         >>> from nipype import test
         >>> test(extra_argv=['--exe', '-sx']) #doctest: +SKIP
         """
-        return super(_NoseTester, self).test(label=label,
-                                             verbose=verbose,
-                                             extra_argv=extra_argv,
-                                             doctests=doctests,
-                                             coverage=coverage)
+        cwd = os.getcwd()
+        testval = super(_NoseTester, self).test(label=label,
+                                                verbose=verbose,
+                                                extra_argv=extra_argv,
+                                                doctests=doctests,
+                                                coverage=coverage)
+        os.chdir(cwd)
+        return testval
 
 try:
     test = _NoseTester(raise_warnings="release").test
